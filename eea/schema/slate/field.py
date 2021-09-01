@@ -16,4 +16,6 @@ class ISlateJSONField(IJSONField):
 class SlateJSONField(JSONField):
     """ Slate JSON Field """
     def __init__(self, schema=DEFAULT_JSON_SCHEMA, widget=None, **kw):
-        super(SlateJSONField, self).__init__(schema=schema, widget=widget, **kw)
+        super(SlateJSONField, self).__init__(
+            schema=schema, widget=widget, **kw
+        )
