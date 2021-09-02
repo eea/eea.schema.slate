@@ -83,29 +83,29 @@ pipeline {
       steps {
         parallel(
 
-          // "WWW": {
-          //   node(label: 'docker') {
-          //     script {
-          //       try {
-          //         sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh coverage'''
-          //         sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
-          //         stash name: "xunit-reports", includes: "xunit-reports/*.xml"
-          //         sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
-          //         stash name: "coverage.xml", includes: "coverage.xml"
-          //       } finally {
-          //         sh '''docker rm -v $BUILD_TAG-www'''
-          //       }
-          //       junit 'xunit-reports/*.xml'
-          //     }
-          //   }
-          // },
+          "WWW": {
+            node(label: 'docker') {
+              script {
+                try {
+                  sh '''docker run -i --name="$BUILD_TAG-www" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/www-devel /debug.sh coverage'''
+                  sh '''mkdir -p xunit-reports; docker cp $BUILD_TAG-www:/plone/instance/parts/xmltestreport/testreports/. xunit-reports/'''
+                  stash name: "xunit-reports", includes: "xunit-reports/*.xml"
+                  sh '''docker cp $BUILD_TAG-www:/plone/instance/src/$GIT_NAME/coverage.xml coverage.xml'''
+                  stash name: "coverage.xml", includes: "coverage.xml"
+                } finally {
+                  sh '''docker rm -v $BUILD_TAG-www'''
+                }
+                junit 'xunit-reports/*.xml'
+              }
+            }
+          },
 
 
-          // "KGS": {
-          //   node(label: 'docker') {
-          //     sh '''docker run -i --rm --name="$BUILD_TAG-kgs" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/kgs-devel /debug.sh bin/test --test-path /plone/instance/src/$GIT_NAME -v -vv -s $GIT_NAME'''
-          //   }
-          // },
+          "KGS": {
+            node(label: 'docker') {
+              sh '''docker run -i --rm --name="$BUILD_TAG-kgs" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/kgs-devel /debug.sh bin/test --test-path /plone/instance/src/$GIT_NAME -v -vv -s $GIT_NAME'''
+            }
+          },
 
           "Plone4": {
             node(label: 'docker') {

@@ -3,6 +3,8 @@ Changelog
 
 1.1-dev0 - (unreleased)
 ---------------------------
+* More testing. Update Jenkins pipeline
+  [avoinea]
 
 1.0 - (2021-09-01)
 -----------------------
