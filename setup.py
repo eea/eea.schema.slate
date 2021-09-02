@@ -41,6 +41,7 @@ setup(
         install_requires=[
         'setuptools',
         # -*- Extra requirements: -*-
+        'plone.schema>=1.3.0',
     ],
     extras_require={
         'test': [
