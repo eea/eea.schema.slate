@@ -1,5 +1,5 @@
-""" JsonSchema providers.
-"""
+"""JsonSchema providers."""
+
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
@@ -11,19 +11,16 @@ from plone.restapi.types.adapters import DefaultJsonSchemaProvider
 @adapter(ISlateJSONField, Interface, Interface)
 @implementer(IJsonSchemaProvider)
 class SlateJSONFieldSchemaProvider(DefaultJsonSchemaProvider):
-    """ Slate JSON Field Schema Provider
-    """
+    """Slate JSON Field Schema Provider"""
+
     def get_type(self):
-        """ Type
-        """
+        """Type"""
         return "array"
 
     def get_widget(self):
-        """ Widget
-        """
+        """Widget"""
         return getattr(self.field, "widget", False) or "slate"
 
     def get_factory(self):
-        """ Factory
-        """
+        """Factory"""
         return "SlateJSONField"
