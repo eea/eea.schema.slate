@@ -10,7 +10,7 @@ class TestSlateJSONField(unittest.TestCase):
     """Test SlateJSONField."""
 
     def setUp(self):
-        self.field = SlateJSONField(title=u"Contact")
+        self.field = SlateJSONField(title="Contact")
 
     def test_default_schema(self):
         """Test that default schema is a JSON array."""
@@ -19,27 +19,27 @@ class TestSlateJSONField(unittest.TestCase):
 
     def test_from_unicode_simple_list(self):
         """Test fromUnicode with a simple JSON list."""
-        result = self.field.fromUnicode('[1, 2, 3]')
+        result = self.field.fromUnicode("[1, 2, 3]")
         self.assertEqual(result, [1, 2, 3])
 
     def test_from_unicode_json_object(self):
         """Test fromUnicode with JSON booleans and null."""
-        result = self.field.fromUnicode('[true, false, null]')
+        result = self.field.fromUnicode("[true, false, null]")
         self.assertEqual(result, [True, False, None])
 
     def test_from_unicode_python_list_string(self):
         """Test fromUnicode with a Python list stored as string."""
-        result = self.field.fromUnicode('[True, False, None]')
+        result = self.field.fromUnicode("[True, False, None]")
         self.assertEqual(result, [True, False, None])
 
     def test_from_unicode_nested_list(self):
         """Test fromUnicode with nested lists."""
-        result = self.field.fromUnicode('[[1, 2], [3, 4]]')
+        result = self.field.fromUnicode("[[1, 2], [3, 4]]")
         self.assertEqual(result, [[1, 2], [3, 4]])
 
     def test_from_unicode_empty_list(self):
         """Test fromUnicode with empty list."""
-        result = self.field.fromUnicode('[]')
+        result = self.field.fromUnicode("[]")
         self.assertEqual(result, [])
 
     def test_from_unicode_dict_in_list(self):
@@ -54,13 +54,13 @@ class TestSlateJSONField(unittest.TestCase):
 
     def test_field_title(self):
         """Test that field title is set."""
-        self.assertEqual(self.field.title, u"Contact")
+        self.assertEqual(self.field.title, "Contact")
 
     def test_custom_schema(self):
         """Test creating field with custom schema."""
         custom_schema = json.dumps({"type": "array", "items": {"type": "string"}})
-        field = SlateJSONField(schema=custom_schema, title=u"Custom")
-        self.assertEqual(field.title, u"Custom")
+        field = SlateJSONField(schema=custom_schema, title="Custom")
+        self.assertEqual(field.title, "Custom")
 
     def test_widget_default_none(self):
         """Test that widget defaults to None."""
@@ -68,7 +68,7 @@ class TestSlateJSONField(unittest.TestCase):
 
     def test_custom_widget(self):
         """Test creating field with custom widget."""
-        field = SlateJSONField(widget="slate", title=u"Custom")
+        field = SlateJSONField(widget="slate", title="Custom")
         self.assertEqual(field.widget, "slate")
 
     def test_implements_islatejsonfield(self):
