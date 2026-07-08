@@ -24,7 +24,6 @@ class TestSetup(unittest.TestCase):
     def test_slate_field_schema_provider_registered(self):
         """Test that SlateJSONFieldSchemaProvider adapter is registered."""
         from zope.component import queryAdapter
-        from eea.schema.slate.field import ISlateJSONField
         from plone.restapi.types.interfaces import IJsonSchemaProvider
 
         # The adapter should be registered for ISlateJSONField
