@@ -17,6 +17,7 @@ class TestSetup(unittest.TestCase):
     def test_zcml_loaded(self):
         """Test that ZCML is loaded and adapters are registered."""
         from zope.component import getGlobalSiteManager
+
         sm = getGlobalSiteManager()
         self.assertIsNotNone(sm)
 
@@ -25,6 +26,7 @@ class TestSetup(unittest.TestCase):
         from zope.component import queryAdapter
         from eea.schema.slate.field import ISlateJSONField
         from plone.restapi.types.interfaces import IJsonSchemaProvider
+
         # The adapter should be registered for ISlateJSONField
         self.assertIsNotNone(queryAdapter(None, IJsonSchemaProvider))
 
